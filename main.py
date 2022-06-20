@@ -27,15 +27,15 @@ def upload_image():
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		#print('upload_image filename: ' + filename)
 		flash('Image successfully uploaded and displayed below')
-		return render_template('upload.html', filename=filename)
+		return render_template('upload.html', filenames=['uploads/'+filename,"validate/101_3.png"])
 	else:
 		flash('Allowed image types are -> png, jpg, jpeg, gif')
 		return redirect(request.url)
 
-@app.route('/display/<filename>')
-def display_image(filename):
+@app.route('/display/<directory>/<filename>')
+def display_image(directory,filename):
 	#print('display_image filename: ' + filename)
-	return redirect(url_for('static', filename='uploads/' + filename), code=301)
+	return redirect(url_for('static',filename= directory+'/'+filename), code=301)
 
 if __name__ == "__main__":
     app.run()

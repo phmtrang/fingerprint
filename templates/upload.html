@@ -12,11 +12,15 @@
 	  {% endif %}
 	{% endwith %}
 </p>
-{% if filename %}
+{% for filename in filenames %}
+{% if filename%}
+<p>{{filename}}</p>
 	<div>
-		<img src="{{ url_for('display_image', filename=filename) }}">
+		<img src="{{ url_for('display_image', directory=directory,filename=filename)}}">
 	</div>
 {% endif %}
+{% endfor %}
+
 <form method="post" action="/" enctype="multipart/form-data">
     <dl>
 		<p>
