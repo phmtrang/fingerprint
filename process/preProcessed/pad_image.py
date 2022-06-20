@@ -1,9 +1,9 @@
 import numpy as np
 import cv2
 
-width, height = 242, 341
 
-def pad_image(image):
+
+def pad_image(image,width, height):
     if isinstance(image,str):
         image = cv2.imread(image)
         
