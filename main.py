@@ -3,6 +3,7 @@ from app import app
 import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
+import predict
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -27,7 +28,9 @@ def upload_image():
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		#print('upload_image filename: ' + filename)
 		flash('Image successfully uploaded and displayed below')
-		return render_template('upload.html', filenames=['uploads/'+filename,"validate/101_3.png"])
+		fileResult = predict.similar(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		# print (fileResult)
+		return render_template('upload.html', filenames=['uploads/'+filename,'validate/'+ fileResult])
 	else:
 		flash('Allowed image types are -> png, jpg, jpeg, gif')
 		return redirect(request.url)

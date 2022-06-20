@@ -11,11 +11,11 @@ from skimage.morphology import thin, skeletonize
 from hog import hog
 from process.preProcessed import pad_image
 width, height = 242, 341
-db = sys.argv[1]
+# db = sys.argv[1]
 
 save_dir = "features"
 
-data_paths = glob.glob(f"processed/{db}/*.png")
+data_paths = glob.glob(f"processed/*.png")
 
 merge_size = []
 
@@ -45,8 +45,8 @@ for path in tqdm(data_paths):
 
     H = hog(inp_image)
 
-    os.makedirs(os.path.join(save_dir, db), exist_ok=True)
+    os.makedirs(os.path.join(save_dir), exist_ok=True)
     # np.save(os.path.join(save_dir, db, os.path.basename(path)[:-4]) + ".npy", feature)
-    np.save(os.path.join(save_dir, db, os.path.basename(path)[:-4]) + ".npy", H)
-    print(os.path.join(save_dir, db, os.path.basename(path)[:-4]) + ".npy")
+    np.save(os.path.join(save_dir, os.path.basename(path)[:-4]) + ".npy", H)
+    print(os.path.join(save_dir, os.path.basename(path)[:-4]) + ".npy")
 
