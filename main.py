@@ -21,18 +21,18 @@ def upload_image():
 		return redirect(request.url)
 	file = request.files['file']
 	if file.filename == '':
-		flash('No image selected for uploading')
+		flash('Không có ảnh nào được chọn')
 		return redirect(request.url)
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		#print('upload_image filename: ' + filename)
-		flash('Image successfully uploaded and displayed below')
+		flash('Ảnh được upload thành công và hiển thị kết quả')
 		fileResult = predict.similar(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		# print (fileResult)
 		return render_template('upload.html', filenames=['uploads/'+filename,'validate/'+ fileResult])
 	else:
-		flash('Allowed image types are -> png, jpg, jpeg, gif')
+		flash('Chỉ cho phép các kiểu file có đuôi là -> png, jpg, jpeg, gif')
 		return redirect(request.url)
 
 @app.route('/display/<directory>/<filename>')

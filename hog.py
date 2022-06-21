@@ -8,10 +8,10 @@ def hog(img_gray, cell_size=8, block_size=2, bins=9):
     h, w = img.shape 
     
     # gradient
-    xkernel = np.array([[-1, 0, 1]])
-    ykernel = np.array([[-1], [0], [1]])
-    dx = cv2.filter2D(img, cv2.CV_32F, xkernel)
-    dy = cv2.filter2D(img, cv2.CV_32F, ykernel)
+    xsobel = np.array([[-1, 0, 1],[-2,0,2],[-1,0,1]])
+    ysobel = np.array([[-1,-2,-1], [0,0,0], [1,2,1]])
+    dx = cv2.filter2D(img, cv2.CV_32F, xsobel)
+    dy = cv2.filter2D(img, cv2.CV_32F, ysobel)
     
     # histogram
     magnitude = np.sqrt(np.square(dx) + np.square(dy))

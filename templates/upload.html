@@ -1,6 +1,34 @@
 <!doctype html>
-<title>Python Flask Image Upload and Display Example</title>
-<h2>Select an image to upload and display</h2>
+<html lang="vi">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport"
+			  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Trang demo CSDL đa phương tiện</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+		<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+
+</head>
+<body>
+
+<div class="container">
+<h2 class="text-info" style="margin-bottom: 50px;">Demo</h2>
+<form method="post" action="/" enctype="multipart/form-data">
+    <div>
+		<p>
+			<input type="file" name="file" autocomplete="off" required class="form-control btn">
+		</p>
+    </div>
+    <div class = "row">
+		<div class = "col-sm-6"></div>
+		<div class="col-sm-2">
+			<input type="submit" value="Submit" class="form-control  btn-success">
+		</div>
+
+	</div>
+</form>
+
 <p>
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
@@ -12,22 +40,20 @@
 	  {% endif %}
 	{% endwith %}
 </p>
+<div class="container-fluid">
+<div class="row">
 {% for filename in filenames %}
 {% if filename%}
-<p>{{filename}}</p>
-	<div>
-		<img src="{{ url_for('display_image', directory=directory,filename=filename)}}">
+	<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+		<p>{{filename}}</p>
+		<div>
+		<img src="{{ url_for('display_image', directory=directory,filename=filename)}}" alt = "eror" width="400px" height="400px">
+		</div>
 	</div>
 {% endif %}
 {% endfor %}
-
-<form method="post" action="/" enctype="multipart/form-data">
-    <dl>
-		<p>
-			<input type="file" name="file" autocomplete="off" required>
-		</p>
-    </dl>
-    <p>
-		<input type="submit" value="Submit">
-	</p>
-</form>
+</div>
+</div>
+</div>
+</body>
+</html>
